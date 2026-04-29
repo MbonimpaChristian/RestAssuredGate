@@ -3,6 +3,9 @@ package base;
 import io.restassured.response.Response;
 import routes.Routes;
 
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class DummyAPI {
 
@@ -26,4 +29,9 @@ public class DummyAPI {
         return RestResource.delete(Routes.DELETE_USER, userId);
     }
 
+
+    public static Response echoPost(Object name) {
+        return RestResource.encodedTest(Routes.Encoded,"name", name);
+
+    }
 }
