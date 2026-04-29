@@ -31,7 +31,7 @@ public class RestResource {
         return given(getRequestSpec())
                 .body(payload)
                 .when()
-                .post(Routes.USERS)
+                .post(Routes.POST)
                 .then()
                 .spec(getResponseSpec())
                 .extract()
@@ -52,10 +52,34 @@ public class RestResource {
         return given(getRequestSpec())
                 .pathParam("id", userId)
                 .when()
-                .get(GET_USER)
+                .get(Routes.USERS)
                 .then()
                 .spec(getResponseSpec())
                 .extract()
                 .response();
     }
+
+    public static Response updateUser(int userId, Object payload) {
+        return given(getRequestSpec())
+                .pathParam("id", userId)
+                .body(payload)
+                .when()
+                .put(Routes.USERS)
+                .then()
+                .spec(getResponseSpec())
+                .extract()
+                .response();
+    }
+
+    public static Response deleteUser(int userId) {
+        return given(getRequestSpec())
+                .pathParam("id", userId)
+                .when()
+                .delete(Routes.USERS)
+                .then()
+                .spec(getResponseSpec())
+                .extract()
+                .response();
+    }
+
 }
