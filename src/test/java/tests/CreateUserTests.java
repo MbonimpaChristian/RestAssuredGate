@@ -70,7 +70,7 @@ public class CreateUserTests {
     @Test
     public void testCreateUserMalformedJson() {
 
-        String invalidJson = "{ firstName: John ";
+        String invalidJson = "{ firstName: John }";
 
         Response response = DummyAPI.createUser(invalidJson);
 
