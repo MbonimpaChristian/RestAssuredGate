@@ -71,6 +71,6 @@ public class UserSchemaValidationTest {
                 .statusCode(200)
                 .contentType("application/json")
                 .time(lessThan(3000L))
-                .body(matchesJsonSchemaInClasspath("schemas/getUsersSchema.json"));
+                .body(matchesJsonSchemaInClasspath("schemas/allUsersSchema.json"));
     }
 }

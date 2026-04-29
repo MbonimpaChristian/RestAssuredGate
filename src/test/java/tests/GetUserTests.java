@@ -16,7 +16,9 @@ public class GetUserTests {
         Assert.assertEquals(response.statusCode(), 200);
         Assert.assertTrue(response.getTime() < 3000);
         Assert.assertTrue(response.getContentType().contains("application/json"));
-        Assert.assertTrue(response.equals(matchesJsonSchemaInClasspath("schemas/allUsersSchema.json")));
+
+        response.then()
+                .body(matchesJsonSchemaInClasspath("schemas/allUsersSchema.json"));
     }
 
     @Test
@@ -25,7 +27,9 @@ public class GetUserTests {
 
         Assert.assertEquals(response.statusCode(), 200);
         Assert.assertEquals(response.jsonPath().getInt("id"), 1);
-        Assert.assertTrue(response.equals(matchesJsonSchemaInClasspath("schemas/singleUserSchema.json")));
+
+        response.then()
+                .body(matchesJsonSchemaInClasspath("schemas/singleUserSchema.json"));
     }
 
     @Test
@@ -34,5 +38,4 @@ public class GetUserTests {
 
         Assert.assertEquals(response.statusCode(), 404);
     }
-
 }

@@ -4,7 +4,7 @@
     "id": { "type": "number" },
     "firstName": { "type": "string" },
     "lastName": { "type": "string" },
-    "age": { "type": "number" }
+    "age": { "type": ["number", "null"] }
   },
-  "required": ["id", "firstName", "lastName", "age"]
+  "required": ["id", "firstName", "lastName"]
 }

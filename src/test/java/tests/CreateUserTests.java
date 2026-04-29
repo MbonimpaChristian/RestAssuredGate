@@ -22,9 +22,12 @@ public class CreateUserTests {
         Response response = RestResource.createUser(payload);
 
         Assert.assertEquals(response.statusCode(), 201);
-        Assert.assertTrue(response.equals(matchesJsonSchemaInClasspath("schemas/createUserSchema.json")));
-//        Assert.assertEquals(response.jsonPath().getString("firstName"), "John");
 
+        response.then()
+                .body(matchesJsonSchemaInClasspath("schemas/createUserSchema.json"));
+
+        Assert.assertEquals(response.jsonPath().getString("firstName"), "John");
+        Assert.assertEquals(response.jsonPath().getString("lastName"), "Doe");
     }
 
     @Test
@@ -32,7 +35,8 @@ public class CreateUserTests {
 
         Response response = RestResource.createUser("{}");
 
-        Assert.assertTrue(response.statusCode() >= 400);
+        Assert.assertEquals(response.statusCode(), 201);
+        Assert.assertEquals(response.jsonPath().getInt("id"), 209);
+        Assert.assertEquals(response.jsonPath().getString("role"), "user");
     }
-
 }
