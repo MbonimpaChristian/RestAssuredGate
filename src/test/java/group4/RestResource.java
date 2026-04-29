@@ -1,6 +1,7 @@
 package group4;
 
 import io.restassured.response.Response;
+import routes.Routes;
 
 import java.util.HashMap;
 
@@ -24,5 +25,37 @@ public class RestResource {
                         extract().
                         response();
 
+    }
+
+    public static Response createUser(Object payload) {
+        return given(getRequestSpec())
+                .body(payload)
+                .when()
+                .post(Routes.USERS)
+                .then()
+                .spec(getResponseSpec())
+                .extract()
+                .response();
+    }
+
+    public static Response getAllUsers() {
+        return given(getRequestSpec())
+                .when()
+                .get(Routes.USERS)
+                .then()
+                .spec(getResponseSpec())
+                .extract()
+                .response();
+    }
+
+    public static Response getUser(int userId) {
+        return given(getRequestSpec())
+                .pathParam("id", userId)
+                .when()
+                .get(GET_USER)
+                .then()
+                .spec(getResponseSpec())
+                .extract()
+                .response();
     }
 }
