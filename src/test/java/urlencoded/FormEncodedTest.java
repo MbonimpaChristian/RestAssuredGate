@@ -13,9 +13,10 @@ public class FormEncodedTest {
     public void testFormUrlEncoded() {
         given()
                 .baseUri(ConfigLoader.getUploadBaseUrl())
-                .contentType(ContentType.URLENC)
+                .contentType("application/x-www-form-urlencoded; charset=UTF-8")
                 .formParam("username", "group4")
                 .formParam("role", "QA_Engineers")
+                .log().all()
                 .when()
                 .post("/post")
                 .then()
