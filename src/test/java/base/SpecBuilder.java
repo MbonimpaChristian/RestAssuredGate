@@ -20,12 +20,12 @@ public class SpecBuilder {
                 .setBaseUri(ConfigLoader.getBaseUrl())
                     .addFilters(getLoggingFilters())
                     .setContentType(ContentType.JSON).
-                log(LogDetail.ALL).build();
+                build();
     }
 
     public static ResponseSpecification getResponseSpec(){
         return new ResponseSpecBuilder()
                 .expectContentType(ContentType.JSON)
-                .log(LogDetail.ALL).build();
+                .build();
     }
 }
