@@ -1,11 +1,10 @@
 package tests;
 
-import base.RestResource;
+import base.DummyAPI;
 import constants.StatusCode;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import payload.pojo.Hair;
 import payload.pojo.User;
 import utils.FakerUtils;
 
@@ -25,7 +24,7 @@ public class CreateUserTests {
         payload.put("firstName", "John");
         payload.put("lastName", "Doe");
 
-        Response response = RestResource.createUser(payload);
+        Response response = DummyAPI.createUser(payload);
 
         response.then()
                 .body(matchesJsonSchemaInClasspath("schemas/createUserSchema.json"));
@@ -44,7 +43,7 @@ public class CreateUserTests {
                 "    \"firstName\": \"John\",\n" +
                 "    \"lastName\": \"Doe\"}";
 
-        Response response = RestResource.createUser(payload);
+        Response response = DummyAPI.createUser(payload);
 
         Assert.assertEquals(response.statusCode(), StatusCode.CODE_201.getCode());
         Assert.assertEquals(response.jsonPath().getString("firstName"), "John");
@@ -59,7 +58,7 @@ public class CreateUserTests {
         payload.setHair(FakerUtils.getHair());
 
 
-        Response response = RestResource.createUser(payload);
+        Response response = DummyAPI.createUser(payload);
         User responseUser = response.as(User.class);
 
         Assert.assertEquals(response.statusCode(), StatusCode.CODE_201.getCode());
@@ -69,14 +68,12 @@ public class CreateUserTests {
     }
 
     @Test
-    public void testCreateUserEmptyBody() {
+    public void testCreateUserMalformedJson() {
 
-        Response response = RestResource.createUser("{}");
+        String invalidJson = "{ firstName: John ";
 
-        Assert.assertEquals(response.statusCode(), StatusCode.CODE_201.getCode());
-        Assert.assertEquals(response.jsonPath().getInt("id"), StatusCode.CODE_200.getCode());
-        Assert.assertEquals(response.jsonPath().getString("role"), "user");
-        System.out.println("Response time: " + response.getTime());
+        Response response = DummyAPI.createUser(invalidJson);
+
         Assert.assertTrue(response.statusCode() >= StatusCode.CODE_400.getCode());
     }
 }

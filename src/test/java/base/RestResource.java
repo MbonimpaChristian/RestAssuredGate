@@ -1,71 +1,65 @@
 package base;
 
 import io.restassured.response.Response;
-import routes.Routes;
-
-import java.util.HashMap;
 
 import static base.SpecBuilder.getRequestSpec;
 import static base.SpecBuilder.getResponseSpec;
 import static io.restassured.RestAssured.given;
 
-
 public class RestResource {
 
-
-    public static Response createUser(Object payload) {
+    public static Response post(String path, Object payload) {
         return given(getRequestSpec())
                 .body(payload)
                 .when()
-                .post(Routes.CREATE_USER)
+                .post(path)
                 .then()
                 .spec(getResponseSpec())
                 .extract()
                 .response();
     }
 
-    public static Response getAllUsers() {
+    public static Response get(String path) {
         return given(getRequestSpec())
                 .when()
-                .get(Routes.GET_ALL_USERS)
+                .get(path)
                 .then()
                 .spec(getResponseSpec())
                 .extract()
                 .response();
     }
 
-    public static Response getUser(int userId) {
+    public static Response get(String path, int id) {
         return given(getRequestSpec())
-                .pathParam("id", userId)
+                .pathParam("id", id)
                 .when()
-                .get(Routes.GET_SINGLE_USER)
+                .get(path)
                 .then()
                 .spec(getResponseSpec())
                 .extract()
                 .response();
     }
 
-    public static Response updateUser(int userId, Object payload) {
+    public static Response put(String path, int id, Object payload) {
         return given(getRequestSpec())
-                .pathParam("id", userId)
+                .pathParam("id", id)
                 .body(payload)
                 .when()
-                .put(Routes.UPDATE_USER)
+                .put(path)
                 .then()
                 .spec(getResponseSpec())
                 .extract()
                 .response();
     }
 
-    public static Response deleteUser(int userId) {
+    public static Response delete(String path, int id) {
         return given(getRequestSpec())
-                .pathParam("id", userId)
+                .pathParam("id", id)
                 .when()
-                .delete(Routes.DELETE_USER)
+                .delete(path)
                 .then()
                 .spec(getResponseSpec())
                 .extract()
                 .response();
     }
-
 }

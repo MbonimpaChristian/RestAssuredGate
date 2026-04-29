@@ -1,6 +1,6 @@
 package tests;
 
-import base.RestResource;
+import base.DummyAPI;
 import constants.StatusCode;
 import io.restassured.response.Response;
 import org.testng.Assert;
@@ -17,11 +17,11 @@ public class UpdateUserTests {
         Map<String, Object> payload = new HashMap<>();
         payload.put("firstName", "UpdatedName");
 
-        Response response = RestResource.updateUser(1, payload);
+        Response response = DummyAPI.updateUser(1, payload);
 
         System.out.println("Response time: " + response.getTime());
-        Assert.assertEquals(response.statusCode(), 200);
-        Assert.assertEquals(response.statusCode(), StatusCode.CODE_200);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_200.getCode());
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_200.getCode());
         Assert.assertEquals(response.jsonPath().getString("firstName"), "UpdatedName");
     }
 
@@ -31,10 +31,10 @@ public class UpdateUserTests {
         Map<String, Object> payload = new HashMap<>();
         payload.put("firstName", "Fail");
 
-        Response response = RestResource.updateUser(99999, payload);
+        Response response = DummyAPI.updateUser(99999, payload);
 
         System.out.println("Response time: " + response.getTime());
-        Assert.assertEquals(response.statusCode(), 404);
-        Assert.assertEquals(response.statusCode(), StatusCode.CODE_404);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_404.getCode());
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_404.getCode());
     }
 }

@@ -1,5 +1,7 @@
 package upladFile;
 
+import constants.StatusCode;
+import org.testng.IDynamicGraph;
 import org.testng.annotations.Test;
 import utils.ConfigLoader;
 
@@ -21,7 +23,7 @@ public class FileUpload {
                 .post("/post")
                 .then()
                 .log().all()
-                .statusCode(200)
+                .statusCode(StatusCode.CODE_200.getCode())
                 .body("headers.content-type", containsString("multipart/form-data"));
     }
 }
