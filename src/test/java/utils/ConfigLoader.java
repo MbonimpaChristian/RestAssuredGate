@@ -1,40 +1,23 @@
 package utils;
 
+import java.io.FileInputStream;
 import java.util.Properties;
 
 public class ConfigLoader {
-    private final Properties properties;
-    private static ConfigLoader configLoader;
+    private static Properties properties;
 
-    private ConfigLoader() {
-        properties = PropertyUtils.propertyLoader("src/test/resources/config.properties");
-    }
-
-    public static ConfigLoader getInstance() {
-        if (configLoader == null) {
-            configLoader = new ConfigLoader();
+    static {
+        try {
+            FileInputStream fis = new FileInputStream("src/test/resources/config.properties");
+            properties = new Properties();
+            properties.load(fis);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load config file");
         }
-        return configLoader;
     }
 
-    public String getClientId() {
-        String prop = properties.getProperty("client_id");
-        if (prop != null) return prop;
-        else throw new RuntimeException("property client_id is not specified in the config.properties file");
-    }
-
-
-    public String getGrantType() {
-        String prop = properties.getProperty("grant_type");
-        if (prop != null) return prop;
-        else throw new RuntimeException("property grant_type is not specified in the config.properties file");
-    }
-
-
-    public String getUser() {
-        String prop = properties.getProperty("user_id");
-        if (prop != null) return prop;
-        else throw new RuntimeException("property user_id is not specified in the config.properties file");
+    public static String getBaseUrl() {
+        return properties.getProperty("base.url");
     }
 
 }
