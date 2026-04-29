@@ -18,6 +18,7 @@ public class UpdateUserTests {
 
         Response response = RestResource.updateUser(1, payload);
 
+        System.out.println("Response time: " + response.getTime());
         Assert.assertEquals(response.statusCode(), 200);
         Assert.assertEquals(response.jsonPath().getString("firstName"), "UpdatedName");
     }
@@ -30,6 +31,7 @@ public class UpdateUserTests {
 
         Response response = RestResource.updateUser(99999, payload);
 
+        System.out.println("Response time: " + response.getTime());
         Assert.assertEquals(response.statusCode(), 404);
     }
 }

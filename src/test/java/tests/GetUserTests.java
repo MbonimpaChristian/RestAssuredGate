@@ -13,12 +13,14 @@ public class GetUserTests {
     public void testGetAllUsers() {
         Response response = RestResource.getAllUsers();
 
+        response.then()
+                .body(matchesJsonSchemaInClasspath("schemas/allUsersSchema.json"));
+
+        System.out.println("Response time: " + response.getTime());
         Assert.assertEquals(response.statusCode(), 200);
         Assert.assertTrue(response.getTime() < 3000);
         Assert.assertTrue(response.getContentType().contains("application/json"));
 
-        response.then()
-                .body(matchesJsonSchemaInClasspath("schemas/allUsersSchema.json"));
     }
 
     @Test
