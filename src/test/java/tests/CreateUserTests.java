@@ -22,6 +22,12 @@ public class CreateUserTests {
         Response response = RestResource.createUser(payload);
 
         Assert.assertEquals(response.statusCode(), 201);
+<<<<<<< Updated upstream
+=======
+        Assert.assertTrue(response.equals(matchesJsonSchemaInClasspath("schemas/createUserSchema.json")));
+//        Assert.assertEquals(response.jsonPath().getString("firstName"), "John");
+        System.out.println(response.getTime());
+>>>>>>> Stashed changes
 
         response.then()
                 .body(matchesJsonSchemaInClasspath("schemas/createUserSchema.json"));
