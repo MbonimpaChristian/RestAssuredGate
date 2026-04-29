@@ -20,4 +20,8 @@ public class ConfigLoader {
         return properties.getProperty("base.url");
     }
 
+    public static String getUploadBaseUrl() {
+        return properties.getProperty("upload_url");
+    }
+
 }
