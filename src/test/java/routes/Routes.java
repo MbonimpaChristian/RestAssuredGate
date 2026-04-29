@@ -1,9 +1,12 @@
 package routes;
 
 public class Routes {
-    public static final String BASE_PATH = "/v1/";
-    //    public static final String ACCOUNT_PATH = BASE_PATH + "account/";
-    public static final String API = "/api";
-    public static final String USERS = "/users";
-    public static final String TOKEN = "/token";
+
+    public static final String BASE_URL = "https://dummyjson.com";
+
+    public static final String GET_USERS = "/users";
+    public static final String GET_SINGLE_USER = "/users/{id}";
+    public static final String CREATE_USER = "/users/add";
+    public static final String UPDATE_USER = "/users/{id}";
+    public static final String DELETE_USER = "/users/{id}";
 }
