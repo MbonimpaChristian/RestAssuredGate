@@ -1,6 +1,7 @@
 package tests;
 
 import base.RestResource;
+import constants.StatusCode;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -11,7 +12,7 @@ public class GetUserTests {
     public void testGetAllUsers() {
         Response response = RestResource.getAllUsers();
 
-        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_200);
         Assert.assertTrue(response.getTime() < 3000);
         Assert.assertTrue(response.getContentType().contains("application/json"));
     }
@@ -20,7 +21,7 @@ public class GetUserTests {
     public void testGetSingleUser() {
         Response response = RestResource.getUser(1);
 
-        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_200);
         Assert.assertEquals(response.jsonPath().getInt("id"), 1);
     }
 
@@ -28,7 +29,7 @@ public class GetUserTests {
     public void testGetInvalidUser() {
         Response response = RestResource.getUser(99999);
 
-        Assert.assertEquals(response.statusCode(), 404);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_404);
     }
 
 }

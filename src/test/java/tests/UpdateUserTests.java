@@ -1,6 +1,7 @@
 package tests;
 
 import base.RestResource;
+import constants.StatusCode;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,7 +19,7 @@ public class UpdateUserTests {
 
         Response response = RestResource.updateUser(1, payload);
 
-        Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_200);
         Assert.assertEquals(response.jsonPath().getString("firstName"), "UpdatedName");
     }
 
@@ -30,6 +31,6 @@ public class UpdateUserTests {
 
         Response response = RestResource.updateUser(99999, payload);
 
-        Assert.assertEquals(response.statusCode(), 404);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_404);
     }
 }
