@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class ConfigLoader {
+
     private static Properties properties;
 
     static {
@@ -12,7 +13,7 @@ public class ConfigLoader {
             properties = new Properties();
             properties.load(fis);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load config file");
+            throw new RuntimeException("Failed to load config file", e);
         }
     }
 
@@ -21,7 +22,14 @@ public class ConfigLoader {
     }
 
     public static String getUploadBaseUrl() {
-        return properties.getProperty("upload_url");
+        return properties.getProperty("upload.base.url");
     }
 
+    public static String getUploadPath() {
+        return properties.getProperty("upload.path");
+    }
+
+    public static String getFilePath() {
+        return properties.getProperty("file.path");
+    }
 }

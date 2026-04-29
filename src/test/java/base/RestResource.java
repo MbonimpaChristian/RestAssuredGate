@@ -1,10 +1,9 @@
 package base;
 
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import utils.ConfigLoader;
 
-import java.util.Map;
+import java.io.File;
 
 import static base.SpecBuilder.getRequestSpec;
 import static base.SpecBuilder.getResponseSpec;
@@ -68,11 +67,23 @@ public class RestResource {
     }
 
     public static Response encodedTest(String path, String paramName, Object value) {
-        return given(getRequestSpec())
+        return given()
                 .baseUri(ConfigLoader.getUploadBaseUrl())
                 .formParam(paramName, value)
                 .when()
                 .post(path)
+                .then()
+                .extract()
+                .response();
+    }
+
+    public static Response uploadFile(File file) {
+
+        return given()
+                .baseUri(ConfigLoader.getUploadBaseUrl())
+                .multiPart("file", file)
+                .when()
+                .post(ConfigLoader.getUploadPath())
                 .then()
                 .extract()
                 .response();
