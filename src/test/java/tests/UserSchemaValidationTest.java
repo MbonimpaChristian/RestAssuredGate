@@ -4,6 +4,7 @@ import io.restassured.RestAssured;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import routes.Routes;
+import utils.ConfigLoader;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
@@ -13,7 +14,8 @@ public class UserSchemaValidationTest {
 
     @BeforeClass
     public void setup() {
-        RestAssured.baseURI = Routes.BASE_URL;
+        RestAssured.baseURI = ConfigLoader.getBaseUrl();
+
     }
 
     @Test

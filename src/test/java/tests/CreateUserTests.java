@@ -1,6 +1,6 @@
 package tests;
 
-import group4.RestResource;
+import base.RestResource;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
