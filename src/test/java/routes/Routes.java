@@ -2,7 +2,6 @@ package routes;
 
 public class Routes {
 
-    public static final String BASE_URL = "https://dummyjson.com";
 
     public static final String GET_USERS = "/users";
     public static final String GET_SINGLE_USER = "/users/{id}";
@@ -10,7 +9,4 @@ public class Routes {
     public static final String UPDATE_USER = "/users/{id}";
     public static final String DELETE_USER = "/users/{id}";
 
-    private Routes() {
-        // Prevent object creation
-    }
 }
