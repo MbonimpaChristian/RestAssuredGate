@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "id": { "type": "number" },
+    "firstName": { "type": "string" },
+    "lastName": { "type": "string" },
+    "age": { "type": "number" }
+  },
+  "required": ["id", "firstName", "lastName", "age"]
+}
