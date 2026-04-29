@@ -29,9 +29,7 @@ public class CreateUserTests {
 
         response.then()
                 .body(matchesJsonSchemaInClasspath("schemas/createUserSchema.json"));
-        Assert.assertEquals(response.statusCode(), 201);
-
-        Assert.assertEquals(response.statusCode(), StatusCode.CODE_201);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_201.getCode());
         Assert.assertEquals(response.jsonPath().getString("firstName"), "John");
         Assert.assertEquals(response.jsonPath().getString("lastName"), "Doe");
 
@@ -48,7 +46,7 @@ public class CreateUserTests {
 
         Response response = RestResource.createUser(payload);
 
-        Assert.assertEquals(response.statusCode(), StatusCode.CODE_201);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_201.getCode());
         Assert.assertEquals(response.jsonPath().getString("firstName"), "John");
     }
 
@@ -75,8 +73,8 @@ public class CreateUserTests {
 
         Response response = RestResource.createUser("{}");
 
-        Assert.assertEquals(response.statusCode(), 201);
-        Assert.assertEquals(response.jsonPath().getInt("id"), 209);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_201.getCode());
+        Assert.assertEquals(response.jsonPath().getInt("id"), StatusCode.CODE_200.getCode());
         Assert.assertEquals(response.jsonPath().getString("role"), "user");
         System.out.println("Response time: " + response.getTime());
         Assert.assertTrue(response.statusCode() >= StatusCode.CODE_400.getCode());

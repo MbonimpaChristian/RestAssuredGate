@@ -13,7 +13,6 @@ public class DeleteUserTests {
         Response response = RestResource.deleteUser(1);
 
         System.out.println("Response time: " + response.getTime());
-        Assert.assertEquals(response.statusCode(), 200);
         Assert.assertEquals(response.statusCode(), StatusCode.CODE_200);
         Assert.assertTrue(response.asString().contains("isDeleted"));
     }
@@ -24,7 +23,6 @@ public class DeleteUserTests {
         Response response = RestResource.deleteUser(99999);
 
         System.out.println("Response time: " + response.getTime());
-        Assert.assertEquals(response.statusCode(), 404);
         Assert.assertEquals(response.statusCode(), StatusCode.CODE_404);
     }
 }
