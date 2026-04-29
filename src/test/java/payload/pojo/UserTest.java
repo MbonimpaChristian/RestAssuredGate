@@ -1,37 +1,31 @@
-package payload.pojo;
+package tests;
 
 import io.restassured.response.Response;
 import payload.UserResponse;
+import payload.pojo.Company;
+import payload.pojo.User;
 
 import static io.restassured.RestAssured.given;
 
 public class UserTest {
 
-    import io.restassured.response.Response;
-import static io.restassured.RestAssured.*;
+    public void getUsers() {
 
-    public class UserTest {
+        Response response =
+                given()
+                        .when()
+                        .get("https://dummyjson.com/users");
 
-        public void getUsers() {
+        UserResponse userResponse =
+                response.as(UserResponse.class);
 
-            Response response =
-                    given()
-                            .when()
-                            .get("https://dummyjson.com/users");
+        User user = userResponse.getUsers().get(0);
 
-            // 🔥 DESERIALIZATION
-            UserResponse userResponse =
-                    response.as(UserResponse.class);
-
-            // Access data
-            User user = userResponse.getUsers().get(0);
-
-            System.out.println(user.getFirstName());
-            System.out.println(user.getEmail());
-            System.out.println(user.getHair().getColor());
-            System.out.println(user.getAddress().getCity());
-            System.out.println(user.getCompany().getName());
-            System.out.println(user.getCompany().getAddress().getCoordinates().getLat());
-        }
+        System.out.println(user.getFirstName());
+        System.out.println(user.getEmail());
+        System.out.println(user.getHair().getColor());
+        System.out.println(user.getCompany().getAddress().getCity());
+        System.out.println(user.getCompany().getName());
+        System.out.println(user.getCompany().getAddress().getCoordinates().getLat());
     }
 }

@@ -7,17 +7,19 @@ public class Address {
     private String state;
     private String country;
 
-    private Coordinates coordinate;
+    private Coordinates coordinates;
 
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
+
         this.address = address;
     }
 
     public String getCity() {
+
         return city;
     }
 
@@ -41,12 +43,12 @@ public class Address {
         this.country = country;
     }
 
-    public Coordinates getCoordinate() {
-        return coordinate;
+    public Coordinates getCoordinates() {
+        return coordinates;
     }
 
     public void setCoordinate(Coordinates coordinate) {
-        this.coordinate = coordinate;
+        this.coordinates = coordinates;
     }
 
 

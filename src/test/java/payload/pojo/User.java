@@ -1,7 +1,5 @@
 package payload.pojo;
 
-import com.github.javafaker.Address;
-import com.github.javafaker.Company;
 
 public class User {
 
