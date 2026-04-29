@@ -8,6 +8,8 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+
 public class CreateUserTests {
 
     @Test
@@ -20,7 +22,9 @@ public class CreateUserTests {
         Response response = RestResource.createUser(payload);
 
         Assert.assertEquals(response.statusCode(), 201);
-        Assert.assertEquals(response.jsonPath().getString("firstName"), "John");
+        Assert.assertTrue(response.equals(matchesJsonSchemaInClasspath("schemas/createUserSchema.json")));
+//        Assert.assertEquals(response.jsonPath().getString("firstName"), "John");
+
     }
 
     @Test
