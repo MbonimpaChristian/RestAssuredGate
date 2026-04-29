@@ -4,21 +4,21 @@ import io.restassured.response.Response;
 
 import java.util.HashMap;
 
-import static base.SpecBuilder.getAccountRequestSpec;
+import static base.SpecBuilder.getRequestSpec;
 import static base.SpecBuilder.getResponseSpec;
 import static io.restassured.RestAssured.given;
-import static routes.Routes.API;
-import static routes.Routes.TOKEN;
+import static routes.Routes.AUTH;
+import static routes.Routes.LOGIN;
 
 public class RestResource {
 
     public static Response postAccount(HashMap<String, String> formParams){
 
         return
-                given(getAccountRequestSpec()).
-                        formParams(formParams).
+                given(getRequestSpec()).
+                        body(formParams).
                     when().
-                        post(API + TOKEN).
+                        post(AUTH + LOGIN).
                     then().
                         spec(getResponseSpec()).
                         extract().

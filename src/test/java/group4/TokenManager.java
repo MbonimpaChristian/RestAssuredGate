@@ -12,13 +12,13 @@ import static group4.RestResource.postAccount;
 public class TokenManager {
     private static String access_token;
     private static Instant expiry_time;
+    private static final long expiresIn = Instant.now().getEpochSecond();
 
     public synchronized static String getAccessToken() {
         try{
             if(access_token == null || Instant.now().isAfter(expiry_time)){
                 Response response = renewToken();
-                access_token = response.path("access_token");
-                int expiresIn = response.path("expires_in");
+                access_token = response.path("accessToken");
                 expiry_time = Instant.now().plusSeconds(expiresIn - 300);
             } else {
                 System.out.println("Token is still good to use!");
@@ -33,9 +33,7 @@ public class TokenManager {
         Dotenv dotenv = Dotenv.load();
 
         HashMap<String, String> formParams = new HashMap<>();
-        formParams.put("grant_type", ConfigLoader.getInstance().getGrantType());
-        formParams.put("refresh_token", dotenv.get("REFRESH_TOKEN"));
-        formParams.put("client_id", ConfigLoader.getInstance().getClientId());
+        formParams.put("refreshToken", dotenv.get("REFRESH_TOKEN"));
 
         Response response = postAccount(formParams);
         if(response.statusCode() != 200){

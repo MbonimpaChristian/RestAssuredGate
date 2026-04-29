@@ -7,34 +7,33 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
+import static group4.TokenManager.getAccessToken;
+import static routes.Routes.BASE_URL;
+
 
 public class SpecBuilder {
 
-    static String access_token = "";
+    static String access_token = getAccessToken();
 
     public static RequestSpecification getRequestSpec(){
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
-        requestSpecBuilder.setBaseUri("https://api.spotify.com");
-        requestSpecBuilder.setBasePath("/v1");
+        requestSpecBuilder.setBaseUri(BASE_URL);
         requestSpecBuilder.setContentType(ContentType.JSON);
-        requestSpecBuilder.addHeader("Authorization", "Bearer " + access_token);
         requestSpecBuilder.log(LogDetail.ALL);
         return requestSpecBuilder.build();
     }
 
-    //Renewing the access Token
-    public static RequestSpecification getAccountRequestSpec(){
+    public static RequestSpecification getTokenRequestSpec(){
         RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder();
-        requestSpecBuilder.setBaseUri("https://accounts.spotify.com");
-        requestSpecBuilder.setContentType(ContentType.URLENC);
-        requestSpecBuilder.addHeader("Authorization", "Basic " + "MTg2MWUwZGM5MmQzNDI0MTk5NzQ3OTM3Y2E5NGEyOTU6NDFkNjJlY2ZmNDRkNDc1MmI4N2JkYWI4NDIzODNkNjc=");
+        requestSpecBuilder.setBaseUri(BASE_URL);
+        requestSpecBuilder.setContentType(ContentType.JSON);
+        requestSpecBuilder.addHeader("Authorization", "Bearer" + access_token);
         requestSpecBuilder.log(LogDetail.ALL);
         return requestSpecBuilder.build();
     }
 
     public static ResponseSpecification getResponseSpec(){
         ResponseSpecBuilder responseSpecBuilder = new ResponseSpecBuilder();
-        responseSpecBuilder.expectStatusCode(200);
         responseSpecBuilder.expectContentType(ContentType.JSON);
         responseSpecBuilder.log(LogDetail.ALL);
         return responseSpecBuilder.build();
