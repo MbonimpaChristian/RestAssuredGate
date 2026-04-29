@@ -1,6 +1,7 @@
 package tests;
 
 import base.RestResource;
+import constants.StatusCode;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -20,6 +21,7 @@ public class UpdateUserTests {
 
         System.out.println("Response time: " + response.getTime());
         Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_200);
         Assert.assertEquals(response.jsonPath().getString("firstName"), "UpdatedName");
     }
 
@@ -33,5 +35,6 @@ public class UpdateUserTests {
 
         System.out.println("Response time: " + response.getTime());
         Assert.assertEquals(response.statusCode(), 404);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_404);
     }
 }

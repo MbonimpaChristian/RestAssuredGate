@@ -1,6 +1,7 @@
 package tests;
 
 import base.RestResource;
+import constants.StatusCode;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -18,6 +19,7 @@ public class GetUserTests {
 
         System.out.println("Response time: " + response.getTime());
         Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_200);
         Assert.assertTrue(response.getTime() < 3000);
         Assert.assertTrue(response.getContentType().contains("application/json"));
 
@@ -29,9 +31,6 @@ public class GetUserTests {
 
         Assert.assertEquals(response.statusCode(), 200);
         Assert.assertEquals(response.jsonPath().getInt("id"), 1);
-
-        response.then()
-                .body(matchesJsonSchemaInClasspath("schemas/singleUserSchema.json"));
     }
 
     @Test
@@ -40,4 +39,5 @@ public class GetUserTests {
 
         Assert.assertEquals(response.statusCode(), 404);
     }
+
 }

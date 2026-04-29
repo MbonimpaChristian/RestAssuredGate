@@ -1,6 +1,7 @@
 package tests;
 
 import base.RestResource;
+import constants.StatusCode;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,6 +14,7 @@ public class DeleteUserTests {
 
         System.out.println("Response time: " + response.getTime());
         Assert.assertEquals(response.statusCode(), 200);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_200);
         Assert.assertTrue(response.asString().contains("isDeleted"));
     }
 
@@ -23,5 +25,6 @@ public class DeleteUserTests {
 
         System.out.println("Response time: " + response.getTime());
         Assert.assertEquals(response.statusCode(), 404);
+        Assert.assertEquals(response.statusCode(), StatusCode.CODE_404);
     }
 }
