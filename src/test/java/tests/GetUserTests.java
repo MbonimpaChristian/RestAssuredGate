@@ -28,6 +28,8 @@ public class GetUserTests {
     @Test
     public void testGetSingleUser() {
         Response response = DummyAPI.getUser(1);
+        response.then()
+                .body(matchesJsonSchemaInClasspath("schemas/singleUserSchema.json"));
 
         Assert.assertEquals(response.statusCode(), StatusCode.CODE_200.getCode());
         Assert.assertEquals(response.jsonPath().getInt("id"), 1);

@@ -43,6 +43,7 @@ public class CreateUserTests {
                 "    \"firstName\": \"John\",\n" +
                 "    \"lastName\": \"Doe\"}";
 
+
         Response response = DummyAPI.createUser(payload);
 
         Assert.assertEquals(response.statusCode(), StatusCode.CODE_201.getCode());
@@ -70,7 +71,7 @@ public class CreateUserTests {
     @Test
     public void testCreateUserMalformedJson() {
 
-        String invalidJson = "{ firstName: John }";
+        String invalidJson = "{ firstName: John ";
 
         Response response = DummyAPI.createUser(invalidJson);
 

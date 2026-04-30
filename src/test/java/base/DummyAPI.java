@@ -26,6 +26,7 @@ public class DummyAPI {
     }
 
     public static Response deleteUser(int userId) {
+
         return RestResource.delete(Routes.DELETE_USER, userId);
     }
 
